@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>История заказов</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+<div class="panel panel-info">
+    <table class="table table-sm table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Номер заказа</th>
+            <th scope="col">Позиции</th>
+            <th scope="col">Общая стоимость</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.getId()}"/>
+            <td>
+                <a class="nav-link" th:href="@{/order_history/${order.id}/items}" th:text="#{nav.home}"></a>
+            </td>
+            <td th:text="${order.price}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Заготовка магазина</title>
+    <link rel="stylesheet" th:href="@{../static/css/stylesheet.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Cart)}"/>
+
+    <h1>Формируем заказ</h1>
+
+
+        <table class="table table-sm table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Название продукта</th>
+                <th scope="col">Колличество</th>
+                <th scope="col">Цена</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${cart.items}">
+                <td th:text="${item.product.title}"/>
+                <td th:text="${item.quantity "/>
+                <td th:text="${item.price}"/>
+            </tr>
+            </tbody>
+        </table>
+    <br>
+    <span th:text="'Общая стоимость : ' + ${cart.cartPrice}"/>
+    <br>
+
+    <form th:action="@{/orders/create}"  method="POST">
+        <input name="address" type="text" class="form-control" placeholder="Aдресс доставки">
+        <input name="phone_number" th:value="${def_phone}" type="text" class="form-control" placeholder="Номер телефон">
+        <button class="btn btn-primary" type="submit" >Оформить закказ</button>
+    </form>
+
+</div>
+
+</body>
+</html>
